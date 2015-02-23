@@ -9,7 +9,7 @@ lsr_socket_dim = [33, 14.8, 11.5];
 lsr_socket_pos = [-1, 0, lsr_pcb_pos[2]];
 
 lsr_battery_pos = [lsr_pcb_pos[0] + 5, 5, -10];
-lsr_battery_size = [26.5, 46.5, 17.5];
+lsr_battery_dim = [26.5, 46.5, 17.5];
 
 lsr_socket_handle_diameter = 1.5;
 lsr_socket_handle_length = 10;
@@ -50,13 +50,13 @@ module lsr_battery() {
 	battery_contact_color = [0.7, 0.7, 0.7];
 	union() {
 		color(battery_color, lsr_transparency){
-			cube(lsr_battery_size);
+			cube(lsr_battery_dim);
 		
-			translate([(lsr_battery_size[0] / 2) - (contact_distance / 2), lsr_battery_size[1], lsr_battery_size[2] / 2])
+			translate([(lsr_battery_dim[0] / 2) - (contact_distance / 2), lsr_battery_dim[1], lsr_battery_dim[2] / 2])
 				rotate(a = -90, v = [1, 0, 0])
 					cylinder(h = contact_height, r = contact_diameter / 2);
 				
-			translate([(lsr_battery_size[0] / 2) + (contact_distance / 2), lsr_battery_size[1], lsr_battery_size[2] / 2])
+			translate([(lsr_battery_dim[0] / 2) + (contact_distance / 2), lsr_battery_dim[1], lsr_battery_dim[2] / 2])
 				rotate(a = -90, v = [1, 0, 0])
 					cylinder(h = contact_height, r = contact_diameter / 2);
 		}

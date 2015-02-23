@@ -10,10 +10,10 @@ box_transparency = 0.5;
 bottom1_pos = [-box_thick - box_distance, -box_thick - box_distance, lsr_battery_pos[2] - box_thick];
 bottom2_pos = [-(box_thick / 2) - box_distance, -(box_thick / 2) - box_distance, lsr_battery_pos[2] - (box_thick / 2)];
 
-bottom1_dim = [lsr_battery_pos[0] + lsr_battery_size[0] + (2 * box_thick) + (2 * box_distance),
+bottom1_dim = [lsr_battery_pos[0] + lsr_battery_dim[0] + (2 * box_thick) + (2 * box_distance),
 			lsr_pcb_pos[1] + (2 * box_thick) + (2 * box_distance),
 			box_thick / 2];
-bottom2_dim = [	lsr_battery_pos[0] + lsr_battery_size[0] + box_thick + (2 * box_distance),
+bottom2_dim = [	lsr_battery_pos[0] + lsr_battery_dim[0] + box_thick + (2 * box_distance),
 			lsr_pcb_pos[1] + box_thick + (2 * box_distance),
 			box_thick / 2];
 
