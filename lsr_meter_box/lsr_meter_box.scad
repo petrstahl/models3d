@@ -1,5 +1,6 @@
 include <lsr_meter.scad>;
 
+//increase before stl generation
 $fn = 20;
 
 box_thick = 2.4;
@@ -21,7 +22,6 @@ hole_distance = 2.5;
 //////////////////////////////////////////////////////
 module box_bottom() {
 	//bottom side of pcb is at 0
-	//TODO diry zespoda
 	
 	pcb_holder_height = - (bottom2_pos[2] + bottom2_dim[2]);
 	pcb_holder_hole_height = pcb_holder_height;
@@ -101,11 +101,11 @@ module box_top() {
 					cube([bottom1_dim[0], bottom1_dim[1], box_thick]);
 			//lcd holder frame
 			color("red")
-				translate([lcd_viewport_pos[0] - (box_thick / 2), lcd_viewport_pos[1] - (box_thick / 2), lcd_viewport_pos[2] + lcd_viewport_dim[2]])
+				translate([lsr_lcd_viewport_pos[0] - (box_thick / 2), lsr_lcd_viewport_pos[1] - (box_thick / 2), lsr_lcd_viewport_pos[2] + lsr_lcd_viewport_dim[2]])
 					cube([
-						lcd_viewport_dim[0] + box_thick,
-						lcd_viewport_dim[1] + box_thick,
-						(box_top_z) - (lcd_viewport_pos[2] + lcd_viewport_dim[2])
+						lsr_lcd_viewport_dim[0] + box_thick,
+						lsr_lcd_viewport_dim[1] + box_thick,
+						(box_top_z) - (lsr_lcd_viewport_pos[2] + lsr_lcd_viewport_dim[2])
 					]);
 			//pcb holders
 			for (hole_pos = lsr_pcb_holes_pos) {
@@ -133,12 +133,12 @@ module box_top() {
 		//hole for socket handler
 		translate([
 			-box_thick - box_distance - 0.1,
-			socket_handler_position[1] - (socket_handler_hole / 2),
-			socket_handler_position[2]])
+			lsr_socket_handler_position[1] - (lsr_socket_handler_hole / 2),
+			lsr_socket_handler_position[2]])
 			cube([
-				(box_thick / 2) + box_distance + socket_handler_position[0] + (socket_handler_hole / 2) + 0.2,
-				socket_handler_hole,
-				box_height + bottom1_pos[2] - socket_handler_position[2] + (1.5 * box_thick) + 0.1]);
+				(box_thick / 2) + box_distance + lsr_socket_handler_position[0] + (lsr_socket_handler_hole / 2) + 0.2,
+				lsr_socket_handler_hole,
+				box_height + bottom1_pos[2] - lsr_socket_handler_position[2] + (1.5 * box_thick) + 0.1]);
 		//hole for socket
 		translate([lsr_socket_pos[0] - 0.5, lsr_socket_pos[1] - 0.5, box_top_z - 0.1])
 			cube([lsr_socket_dim[0] + 1, lsr_socket_dim[1] + 1, box_thick + 0.2]);
@@ -146,8 +146,8 @@ module box_top() {
 		translate(lsr_button_pos3)
 			cylinder(h = lsr_button_height3 - 1, r = (lsr_button_dia3 / 2) + 0.5);
 		//hole for lcd
-		translate(lcd_viewport_pos)
-			cube([lcd_viewport_dim[0], lcd_viewport_dim[1], lcd_viewport_dim[2] + 100]);
+		translate(lsr_lcd_viewport_pos)
+			cube([lsr_lcd_viewport_dim[0], lsr_lcd_viewport_dim[1], lsr_lcd_viewport_dim[2] + 100]);
 	}
 }
 

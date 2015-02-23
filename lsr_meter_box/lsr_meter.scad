@@ -11,12 +11,12 @@ lsr_socket_pos = [-1, 0, lsr_pcb_pos[2]];
 lsr_battery_pos = [lsr_pcb_pos[0] + 5, 5, -10];
 lsr_battery_size = [26.5, 46.5, 17.5];
 
-socket_handle_diameter = 1.5;
-socket_handle_length = 10;
-socket_handle_diameter1 = 4.5;
-socket_handle_length1 = 7;
-socket_handler_hole = socket_handle_diameter1 + 0.5;
-socket_handler_position = [5, 0.7, 5];
+lsr_socket_handle_diameter = 1.5;
+lsr_socket_handle_length = 10;
+lsr_socket_handle_diameter1 = 4.5;
+lsr_socket_handle_length1 = 7;
+lsr_socket_handler_hole = lsr_socket_handle_diameter1 + 0.5;
+lsr_socket_handler_position = [5, 0.7, 5];
 
 lsr_button_dim1 = [12, 12, 3];
 lsr_button_pos1 = [58, 3, lsr_pcb_pos[2]];
@@ -32,14 +32,14 @@ lsr_button_height3 = 4.4;
 lsr_button_pos3 = [lsr_button_pos2[0], lsr_button_pos2[1], lsr_button_pos2[2] + lsr_button_height2];
 lsr_button_color3 = "yellow";
 
-lcd_bottom_pos = [6, 25, lsr_pcb_pos[2]];
-lcd_bottom_height = 2;
+lsr_lcd_bottom_pos = [6, 25, lsr_pcb_pos[2]];
+lsr_lcd_bottom_height = 2;
 
-lcd_up_pos = [6, 25, lcd_bottom_pos[2] + lcd_bottom_height];
-lcd_up_dim = [58, 38, 3];
+lsr_lcd_up_pos = [6, 25, lsr_lcd_bottom_pos[2] + lsr_lcd_bottom_height];
+lsr_lcd_up_dim = [58, 38, 3];
 
-lcd_viewport_pos = [lcd_up_pos[0] + 3, lcd_up_pos[1] + 3, lcd_up_pos[2] + lcd_up_dim[2]];
-lcd_viewport_dim = [lcd_up_dim[0] - 6, 28, 0.1];
+lsr_lcd_viewport_pos = [lsr_lcd_up_pos[0] + 3, lsr_lcd_up_pos[1] + 3, lsr_lcd_up_pos[2] + lsr_lcd_up_dim[2]];
+lsr_lcd_viewport_dim = [lsr_lcd_up_dim[0] - 6, 28, 0.1];
 
 module lsr_battery() {
 	contact_diameter = 7;
@@ -89,8 +89,8 @@ module lsr_socket() {
 	union() {
 		color(lsr_socket_color, lsr_transparency)
 			cube(lsr_socket_dim);
-		translate(socket_handler_position)
-			lsr_socket_handle();	
+		translate(lsr_socket_handler_position)
+			lsr_lsr_socket_handle();	
 	}
 	
 }
@@ -113,35 +113,35 @@ module lsr_lcd() {
 	union() {
 		//bottom part of lcd	
 		color("white", lsr_transparency)
-			translate(lcd_bottom_pos)
-				linear_extrude(height = lcd_bottom_height)
+			translate(lsr_lcd_bottom_pos)
+				linear_extrude(height = lsr_lcd_bottom_height)
 					polygon([[0, 0], [59, 0], [65, 12], [65, 21], [59, 34], [0, 34]]);
 		//upper part
 		color("black", lsr_transparency)
-			translate(lcd_up_pos)
-				cube(lcd_up_dim);
+			translate(lsr_lcd_up_pos)
+				cube(lsr_lcd_up_dim);
 		//viewport
 		color("green", lsr_transparency)
-			translate(lcd_viewport_pos)
-				cube(lcd_viewport_dim);
+			translate(lsr_lcd_viewport_pos)
+				cube(lsr_lcd_viewport_dim);
 		
 	}
 }
 
-module lsr_socket_handle_single() {
+module lsr_lsr_socket_handle_single() {
 	union() {
-		color("silver", lsr_transparency) cylinder(h = socket_handle_length, r = socket_handle_diameter / 2);
+		color("silver", lsr_transparency) cylinder(h = lsr_socket_handle_length, r = lsr_socket_handle_diameter / 2);
 		color(lsr_socket_color, lsr_transparency)
-			translate([0, 0, socket_handle_length])
-				cylinder(h = socket_handle_length1, r = socket_handle_diameter1 / 2);
+			translate([0, 0, lsr_socket_handle_length])
+				cylinder(h = lsr_socket_handle_length1, r = lsr_socket_handle_diameter1 / 2);
 	}
 }
 
-module lsr_socket_handle() {
+module lsr_lsr_socket_handle() {
 	union() {
-		lsr_socket_handle_single();
+		lsr_lsr_socket_handle_single();
 		rotate(a = -90, v = [0, 1, 0])
-			 lsr_socket_handle_single();
+			 lsr_lsr_socket_handle_single();
 	}	
 }
 
