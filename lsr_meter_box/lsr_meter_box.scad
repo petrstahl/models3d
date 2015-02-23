@@ -1,5 +1,4 @@
-$fa = 1;
-$fs = 1;
+$fn = 20;
 
 lsr_pcb_pos = [71, 63.2, 1.7];
 lsr_pcb_color = [0, 1, 0];
@@ -37,19 +36,19 @@ socket_handle_length1 = 7;
 socket_handler_hole = socket_handle_diameter1 + 0.5;
 socket_handler_position = [5, 0.7, 5];
 
-button_dim1 = [12, 12, 3];
-button_pos1 = [58, 3, lsr_pcb_pos[2]];
-button_color1 = "black";
+lsr_button_dim1 = [12, 12, 3];
+lsr_button_pos1 = [58, 3, lsr_pcb_pos[2]];
+lsr_button_color1 = "black";
 
-button_dia2 = 13;
-button_height2 = 5;
-button_pos2 = [button_pos1[0] + (button_dim1[0] / 2), button_pos1[1] + (button_dim1[1] / 2), button_pos1[2] + button_dim1[2]];
-button_color2 = "blue";
+lsr_button_dia2 = 13;
+lsr_button_height2 = 5;
+lsr_button_pos2 = [lsr_button_pos1[0] + (lsr_button_dim1[0] / 2), lsr_button_pos1[1] + (lsr_button_dim1[1] / 2), lsr_button_pos1[2] + lsr_button_dim1[2]];
+lsr_button_color2 = "blue";
 
-button_dia3 = 11.3;
-button_height3 = 4.4;
-button_pos3 = [button_pos2[0], button_pos2[1], button_pos2[2] + button_height2];
-button_color3 = "yellow";
+lsr_button_dia3 = 11.3;
+lsr_button_height3 = 4.4;
+lsr_button_pos3 = [lsr_button_pos2[0], lsr_button_pos2[1], lsr_button_pos2[2] + lsr_button_height2];
+lsr_button_color3 = "yellow";
 
 lcd_bottom_pos = [6, 25, lsr_pcb_pos[2]];
 lcd_bottom_height = 2;
@@ -114,17 +113,17 @@ module lsr_socket() {
 	
 }
 
-module button() {
+module lsr_button() {
 	union() {
-		color(button_color1, lsr_transparency)
-			translate(button_pos1)
-				cube(button_dim1);
-		color(button_color2, lsr_transparency)
-			translate(button_pos2)
-				cylinder(h = button_height2, r = button_dia2 / 2);
-		color(button_color3, lsr_transparency)
-			translate(button_pos3)
-				cylinder(h = button_height3, r = button_dia3 / 2);
+		color(lsr_button_color1, lsr_transparency)
+			translate(lsr_button_pos1)
+				cube(lsr_button_dim1);
+		color(lsr_button_color2, lsr_transparency)
+			translate(lsr_button_pos2)
+				cylinder(h = lsr_button_height2, r = lsr_button_dia2 / 2);
+		color(lsr_button_color3, lsr_transparency)
+			translate(lsr_button_pos3)
+				cylinder(h = lsr_button_height3, r = lsr_button_dia3 / 2);
 	}
 }
 
@@ -169,7 +168,7 @@ module lsr() {
 		lsr_pcb_bottom();
 		lsr_pcb();
 		lsr_lcd();
-		button();
+		lsr_button();
 		translate(lsr_socket_pos) lsr_socket();
 		translate(lsr_battery_pos) lsr_battery();
 	}
@@ -221,7 +220,7 @@ module box_bottom() {
 }
 
 module box_top() {
-	box_height = button_pos3[2] - bottom1_pos[2] - (box_thick / 2) + 0.5;
+	box_height = lsr_button_pos3[2] - bottom1_pos[2] - (box_thick / 2) + 0.5;
 	box_top_z = bottom1_pos[2] + box_height + (box_thick / 2);
 	difference() {
 		union() {
@@ -253,7 +252,7 @@ module box_top() {
 			}
 			
 			//top_side
-			color("red", box_transparency)
+			color("red", box_transparency) 
 				translate([bottom1_pos[0], bottom1_pos[1], box_top_z])
 					cube([bottom1_dim[0], bottom1_dim[1], box_thick]);
 			//lcd holder frame
@@ -300,8 +299,8 @@ module box_top() {
 		translate([lsr_socket_pos[0] - 0.5, lsr_socket_pos[1] - 0.5, box_top_z - 0.1])
 			cube([lsr_socket_dim[0] + 1, lsr_socket_dim[1] + 1, box_thick + 0.2]);
 		//hole for button
-		translate(button_pos3)
-			cylinder(h = button_height3 - 1, r = (button_dia3 / 2) + 0.5);
+		translate(lsr_button_pos3)
+			cylinder(h = lsr_button_height3 - 1, r = (lsr_button_dia3 / 2) + 0.5);
 		//hole for lcd
 		translate(lcd_viewport_pos)
 			cube([lcd_viewport_dim[0], lcd_viewport_dim[1], lcd_viewport_dim[2] + 100]);
