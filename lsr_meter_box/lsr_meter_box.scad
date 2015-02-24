@@ -1,9 +1,12 @@
 include <lsr_meter.scad>;
+use <lsr_meter_utils.scad>;
 
 //increase before stl generation
 $fn = 20;
 
 box_thick = 2.4;
+box_thick_2 = box_thick / 2;
+
 box_distance = 2;
 box_transparency = 0.5;
 
@@ -151,9 +154,29 @@ module box_top() {
 	}
 }
 
-lsr(); 
+module box_fillet() {
+    translate(bottom1_pos) fillet(2, 100);
+    translate([bottom1_pos[0], bottom1_pos[1] + bottom1_dim[1], bottom1_pos[2]]) rotate([0, 0, 270]) fillet(2, 100);
+    translate([bottom1_pos[0] + bottom1_dim[0], bottom1_pos[1] + bottom1_dim[1], bottom1_pos[2]]) rotate([0, 0, 180]) fillet(2, 100);
+    translate([bottom1_pos[0] + bottom1_dim[0], bottom1_pos[1], bottom1_pos[2]]) rotate([0, 0, 90]) fillet(2, 100);
+}
 
-box_bottom();
-box_top();
+*lsr(); 
 
-//rotate(a = 180, v = [1, 0, 0]) box_top();
+difference() {
+    box_bottom();
+    box_fillet();
+}
+
+*difference() {
+    box_top();
+    box_fillet();
+}
+
+//top side for printing
+*rotate(a = 180, v = [1, 0, 0]) difference() {
+    box_top();
+    box_fillet();
+}
+
+// box_top();
