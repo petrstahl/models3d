@@ -22,6 +22,8 @@ bottom2_dim = [	lsr_battery_pos[0] + lsr_battery_dim[0] + box_thick + (2 * box_d
 
 hole_distance = 2.5;
 
+slicer_hole_correction = 0.15;
+
 //////////////////////////////////////////////////////
 module box_bottom() {
 	//bottom side of pcb is at 0
@@ -52,7 +54,7 @@ module box_bottom() {
 			//pcb holders holes
 			for (hole_pos = lsr_pcb_holes_pos) {
 				translate([hole_pos[0], hole_pos[1], hole_pos[2] - pcb_holder_hole_height + 0.1 - (2 * box_thick)])
-					cylinder(h = pcb_holder_hole_height + 0.1 + (2 * box_thick), r = 1.5);
+					cylinder(h = pcb_holder_hole_height + 0.1 + (2 * box_thick), r = 1.5 + slicer_hole_correction);
 			}
 			
 			//corner holes
@@ -60,7 +62,7 @@ module box_bottom() {
 				[bottom2_pos[0] + bottom2_dim[0] - hole_distance, bottom2_pos[1] + hole_distance, bottom1_pos[2] - 0.1],
 				[bottom2_pos[0] + bottom2_dim[0] - hole_distance, bottom2_pos[1] + bottom2_dim[1] - hole_distance, bottom1_pos[2] - 0.1]]) {
 				translate(hole_pos)
-					cylinder(h = box_thick + 0.2, r = 1.5);
+					cylinder(h = box_thick + 0.2, r = 1.5 + slicer_hole_correction);
 			}
 		}
 	}
