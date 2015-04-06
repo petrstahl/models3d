@@ -119,7 +119,7 @@ module box_top() {
 						translate([hole_pos[0], hole_pos[1], hole_pos[2] + lsr_pcb_pos[2]])
 							cylinder(h = box_top_z - hole_pos[2] - lsr_pcb_pos[2], r = 3);
 					translate([hole_pos[0], hole_pos[1], hole_pos[2]])
-						cylinder(h = box_top_z - hole_pos[2] - box_thick - 1, r = 1);
+						cylinder(h = box_top_z - hole_pos[2] - box_thick - 1, r = 1.4);
 				}
 			}
 			//corner_holder
@@ -130,7 +130,7 @@ module box_top() {
 					translate(hole_pos)
 						cylinder(h = box_height - (box_thick / 2), r = 3);
 					translate(hole_pos)
-						cylinder(h = box_height - (box_thick / 2) - 5, r = 1);
+						cylinder(h = box_height - (box_thick / 2) - 5, r = 1.4);
 				}
 			}
 		}
@@ -149,7 +149,7 @@ module box_top() {
 			cube([lsr_socket_dim[0] + 1, lsr_socket_dim[1] + 1, box_thick + 0.2]);
 		//hole for button
 		translate(lsr_button_pos3)
-			cylinder(h = lsr_button_height3 - 1, r = (lsr_button_dia3 / 2) + 0.5);
+			cylinder(h = lsr_button_height3 - 1, r = (lsr_button_dia3 / 2) + 0.6);
 		//hole for lcd
 		translate(lsr_lcd_viewport_pos)
 			cube([lsr_lcd_viewport_dim[0], lsr_lcd_viewport_dim[1], lsr_lcd_viewport_dim[2] + 100]);
@@ -165,7 +165,7 @@ module box_fillet() {
 
 *lsr(); 
 
-difference() {
+*difference() {
     box_bottom();
     box_fillet();
 }
@@ -176,7 +176,7 @@ difference() {
 }
 
 //top side for printing
-*rotate(a = 180, v = [1, 0, 0]) difference() {
+rotate(a = 180, v = [1, 0, 0]) difference() {
     box_top();
     box_fillet();
 }
